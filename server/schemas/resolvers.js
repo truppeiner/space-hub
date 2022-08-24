@@ -18,6 +18,9 @@ const resolvers = {
         // get all users
         users: async () => {
             return User.find()
+                .populate('threads')
+                .populate('webbs')
+                .sort({ createdAt: -1 })
         },
 
         // get single user 
@@ -29,9 +32,15 @@ const resolvers = {
         // get Webb section
         allWebb: async () => {
             return Webb.find()
-                .populate('Thread')
+                .populate('threads')
                 .sort({ createdAt: -1 })
-        }
+        },
+
+        // get all threads
+        threads: async () => {
+            return Thread.find()
+                .sort({ createdAt:-1 })
+        },
     },
     Mutation: {
         // create user
@@ -85,6 +94,23 @@ const resolvers = {
                 return wipeWebb;
             }
             throw new AuthenticationError('You must be logged in to do this')
+        },
+
+        // create thread
+        createThread: async( parent, args, context ) => {
+            if (context.user){
+                // create thread
+                const thread = await Thread.create({ ...args, username: context.user.username });
+
+                // push thread onto user data 
+                    await User.findByIdAndUpdate(
+                        { _id: context.user._id },
+                        { $push: { threads: thread._id }},
+                        { new: true}
+                    );
+                    return thread;
+            }
+            throw new AuthenticationError('You must be logged in to make a thread');
         }
     }
 };

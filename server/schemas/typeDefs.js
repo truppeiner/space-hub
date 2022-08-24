@@ -30,6 +30,7 @@ const typeDefs = gql`
         me: User
         user(username: String!): User
         allWebb: [Webb]
+        threads: [Thread]
     }
 
     type Mutation {
@@ -37,6 +38,7 @@ const typeDefs = gql`
         createUser(email: String!, username: String!, password: String!): Auth
         createWebb(username: String!, webbTitle: String!, webbDescription: String!): Auth
         deleteWebb(_id: ID!): Webb
+        createThread(username: String!, threadTitle: String!, threadBody: String!): Auth
     }
 
     type Auth {
