@@ -61,7 +61,7 @@ const resolvers = {
         },
 
         // create webb
-        createWebb: async ( parent, args, context ) => {
+        createWebb: async ( parent, args , context ) => {
             if (context.user){
                 // create webb
                 const webb = await Webb.create({ ...args, username: context.user.username });
@@ -78,12 +78,10 @@ const resolvers = {
         },
 
         // delete webb
-        deleteWebb: async (parent, args, context) => {
+        deleteWebb: async (parent, { _id }, context) => {
             if (context.user){
                 // delete webb
-                const wipeWebb = await Webb.findOneAndDelete(
-                    {_id: args.id}
-                );
+                const wipeWebb = await Webb.findByIdAndDelete(_id);
                 return wipeWebb;
             }
             throw new AuthenticationError('You must be logged in to do this')
