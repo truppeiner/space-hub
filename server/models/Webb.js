@@ -17,7 +17,7 @@ const webbSchema = new Schema (
             type: String,
             required: 'Title is required!',
             minlength: 1,
-            maxlength: 30
+            maxlength: 100
         },
         webbDescription: {
             type: String,

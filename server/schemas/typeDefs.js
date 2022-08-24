@@ -39,6 +39,7 @@ const typeDefs = gql`
         createWebb(username: String!, webbTitle: String!, webbDescription: String!): Auth
         deleteWebb(_id: ID!): Webb
         createThread(username: String!, threadTitle: String!, threadBody: String!): Auth
+        createWebbThread(username: String!, webbId: ID!, threadTitle: String!, threadBody: String!): Webb
     }
 
     type Auth {

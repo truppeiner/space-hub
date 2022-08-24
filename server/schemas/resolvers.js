@@ -111,7 +111,31 @@ const resolvers = {
                     return thread;
             }
             throw new AuthenticationError('You must be logged in to make a thread');
-        }
+        },
+
+        // create thread and push to webb
+        createWebbThread: async( parent, args, context ) => {
+            if (context.user){
+                // create thread
+                const thread = await Thread.create({ ...args, username: context.user.username });
+
+                // push thread onto user data 
+                    await User.findByIdAndUpdate(
+                        { _id: context.user._id },
+                        { $push: { threads: thread._id }},
+                        { new: true }
+                    );
+                
+                // push thread onto webb data
+                    await Webb.findOneAndUpdate(
+                        { _id: args.webbId},
+                        { $push: {threads: thread._id }},
+                        { new: true }
+                    )
+                    return thread;
+            }
+            throw new AuthenticationError('You must be logged in to make a thread for the webb');
+        }, 
     }
 };
 

@@ -16,7 +16,7 @@ const threadSchema = new Schema(
             type: String,
             required: 'Title is required',
             minlength: 1,
-            maxlength: 30
+            maxlength: 100
         },
         threadBody: {
             type: String,
