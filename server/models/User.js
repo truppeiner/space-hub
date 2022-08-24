@@ -18,7 +18,26 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true
-        }
+        },
+        threads: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thread'
+            }
+        ],
+        webbs: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Webb'
+            }
+        ],
+        SpaceXs: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'SpaceX'
+            }
+        ]
+
     },
     {
         toJSON: {
@@ -41,6 +60,11 @@ userSchema.pre('save', async function(next) {
 userSchema.methods.isCorrectPassword = async function(password) {
     return bcrypt.compare(password, this.password);
 };
+
+// acquire thread count
+userSchema.virtual('threadCount').get(function(){
+    return this.threads.length;
+});
 
 
 const User = model('User', userSchema);

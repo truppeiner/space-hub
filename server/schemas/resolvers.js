@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Webb, Thread } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -25,7 +25,13 @@ const resolvers = {
             return User.findOne({ username })
                 .select('-__v -password')
         },
-        
+
+        // get Webb section
+        allWebb: async () => {
+            return Webb.find()
+                .populate('Thread')
+                .sort({ createdAt: -1 })
+        }
     },
     Mutation: {
         // create user
@@ -35,6 +41,7 @@ const resolvers = {
 
             return { user, token };
         },
+
         // log in
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
@@ -51,6 +58,35 @@ const resolvers = {
             const token = signToken(user);
             console.log('Successfully logged in!');
             return { token, user };
+        },
+
+        // create webb
+        createWebb: async ( parent, args, context ) => {
+            if (context.user){
+                // create webb
+                const webb = await Webb.create({ ...args, username: context.user.username });
+
+                // push webb onto user data
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { webbs: webb._id }},
+                    { new: true }
+                );
+                return webb;
+            }
+            throw new AuthenticationError('You must be logged in to make a Webb');
+        },
+
+        // delete webb
+        deleteWebb: async (parent, args, context) => {
+            if (context.user){
+                // delete webb
+                const wipeWebb = await Webb.findOneAndDelete(
+                    {_id: args.id}
+                );
+                return wipeWebb;
+            }
+            throw new AuthenticationError('You must be logged in to do this')
         }
     }
 };
