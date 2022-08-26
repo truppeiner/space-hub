@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
@@ -80,23 +81,29 @@ function Header( props ){
                                     Login
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <form onSubmit={handleFormSubmit}>
-                                        <input
-                                            placeholder = 'Enter Email'
-                                            name = 'email'
-                                            type = 'email'
-                                            value = {formState.email}
-                                            onChange = {handleChange}
-                                        />
-                                        <input
-                                            placeholder = 'Enter Password'
-                                            name = 'password'
-                                            type = 'password'
-                                            value = {formState.password}
-                                            onChange = {handleChange}
-                                        />
+                                    <Form onSubmit={handleFormSubmit}>
+                                        <Form.Group className='m-3'>
+                                            <Form.Label>Email Address</Form.Label>
+                                            <Form.Control
+                                                placeholder = 'Enter Email'
+                                                name = 'email'
+                                                type = 'email'
+                                                value = {formState.email}
+                                                onChange = {handleChange}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className='m-3'>
+                                            <Form.Label>Password</Form.Label>
+                                            <Form.Control
+                                                placeholder = 'Enter Password'
+                                                name = 'password'
+                                                type = 'password'
+                                                value = {formState.password}
+                                                onChange = {handleChange}
+                                            />
+                                        </Form.Group>
                                     <Button variant="secondary" onClick = {handleClose} type="submit">Submit</Button>
-                                    </form>
+                                    </Form>
                                 </Modal.Body>
                             </Modal>
                         </>
