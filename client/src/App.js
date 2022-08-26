@@ -1,4 +1,4 @@
-import Header from './components/layout/Header';
+import Home from './components/pages/Home';
 
 // ApolloClient Link functionality 
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from } from '@apollo/client';
@@ -39,7 +39,7 @@ function App() {
   return (
   <ApolloProvider client = {client}>
     <div className="App">
-      <Header/>
+      <Home/>
     </div>
   </ApolloProvider>
   );
