@@ -7,7 +7,6 @@ import { QUERY_WEBB } from "../../utils/queries";
 function Landing(){
     const { data } = useQuery(QUERY_WEBB);
     const webbs = data?.allWebb || [];
-
     return(
         <>
         <div className="main">

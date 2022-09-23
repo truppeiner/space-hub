@@ -36,6 +36,11 @@ const resolvers = {
                 .sort({ createdAt: -1 })
         },
 
+        // // get single Webb
+        // singleWebb: async (parent, { _id }) => {
+        //     return Webb.findOne({ _id })
+        // },
+
         // get all threads
         threads: async () => {
             return Thread.find()
