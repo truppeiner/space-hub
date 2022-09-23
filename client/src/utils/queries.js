@@ -11,3 +11,22 @@ export const QUERY_ME = gql`
     }
 `;
 
+// Get all Webb 
+export const QUERY_WEBB = gql`
+    query AllWebb {
+        allWebb {
+            _id
+            username
+            createdAt
+            webbTitle
+            webbDescription
+            threads {
+                _id
+                username
+                createdAt
+                threadTitle
+                threadBody
+            }
+        }
+    }
+`;
