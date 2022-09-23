@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "../layout/Header";
 import WebbList from "../layout/WebbList/WebbList";
+import "../../assets/css/home.css"
 import { useQuery } from "@apollo/client";
 import { QUERY_WEBB } from "../../utils/queries";
 
@@ -9,12 +10,12 @@ function Landing(){
     const webbs = data?.allWebb || [];
     return(
         <>
-        <div className="main">
+        <main>
             <Header/>
             <WebbList
                 allWebb = {webbs}
             />
-        </div>
+        </main>
         </>
     )
 };

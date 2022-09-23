@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -60,7 +61,7 @@ function Header( props ){
 
     return(
         <>
-            <Navbar bg='light'>
+            <Navbar>
                 <Container>
                     <Navbar.Brand>
                         <h2>Space Hub</h2>
@@ -68,14 +69,16 @@ function Header( props ){
                     {Auth.loggedIn() ? (
                         // if logged in render this section
                         <>
-                            <Navbar.Text>
+                        <Nav>
+                            <Nav.Link className='m-2'>
                                 <Link to="/home" className="homeTitle">
                                     <Button variant='secondary'>Home</Button>
                                 </Link>
-                            </Navbar.Text>
-                            <Navbar.Text>
+                            </Nav.Link>
+                            <Nav.Link className='m-2'>
                                 <Button variant='secondary' onClick={logout}>Logout</Button>
-                            </Navbar.Text>
+                            </Nav.Link>
+                        </Nav>
                         </>
                     ): (
                         // if logged out render this section

@@ -1,4 +1,4 @@
-import '../../assets/css/home.css';
+import '../../assets/css/landing.css';
 import Header from '../layout/Header';
 import videoBg from '../../assets/landing-background.mp4';
 
