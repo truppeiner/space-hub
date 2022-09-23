@@ -1,23 +1,15 @@
-import '../../assets/css/home.css';
-import Header from '../layout/Header';
-import videoBg from '../../assets/landing-background.mp4';
+import Header from "../layout/Header";
 
-function Home(){
+function Landing(){
     return(
         <>
-            <div class='main'>
-                <Header/>
-                <video 
-                    src={videoBg}
-                    autoPlay
-                    loop
-                    muted
-                    />
-            </div>
+        <div className="main">
+            <Header/>
+            <h1>TEST</h1>
+        </div>
         </>
     )
-}
-
-export default Home;
+};
 
 
+export default Landing;

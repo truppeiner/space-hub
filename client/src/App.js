@@ -1,5 +1,7 @@
+import React from "react";
+import Landing from './components/pages/Landing';
 import Home from './components/pages/Home';
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // ApolloClient Link functionality 
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
@@ -38,9 +40,20 @@ const client = new ApolloClient({
 function App() {
   return (
   <ApolloProvider client = {client}>
-    <div className="App">
-      <Home/>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route  
+            path = "/"
+            element = { <Landing/> }
+          />
+          <Route
+            path = "/home"
+            element = { <Home/> }
+          />
+        </Routes>
+      </div>
+    </Router>
   </ApolloProvider>
   );
 }

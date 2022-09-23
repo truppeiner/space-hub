@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Auth from '../../utils/auth';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 
@@ -66,9 +67,16 @@ function Header( props ){
                     </Navbar.Brand>
                     {Auth.loggedIn() ? (
                         // if logged in render this section
+                        <>
+                            <Navbar.Text>
+                                <Link to="/home" className="homeTitle">
+                                    <Button variant='secondary'>Home</Button>
+                                </Link>
+                            </Navbar.Text>
                             <Navbar.Text>
                                 <Button variant='secondary' onClick={logout}>Logout</Button>
                             </Navbar.Text>
+                        </>
                     ): (
                         // if logged out render this section
                         <>
